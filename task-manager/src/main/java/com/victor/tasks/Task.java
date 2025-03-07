@@ -7,18 +7,14 @@ public class Task {
     String title;
     String description;
     String category;
-    TaskState taskState;
+    TaskState state;
 
     public Task(String title, String description, String category) {
         this.id = UUID.randomUUID().toString();
         this.title = title;
         this.description = description;
         this.category = category;
-        this.taskState = TaskState.TODO;
+        this.state = TaskState.TODO;
     }
-
-    /*TODO add stuff */
-
-
 
 }

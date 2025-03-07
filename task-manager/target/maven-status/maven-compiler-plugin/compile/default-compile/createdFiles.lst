@@ -1,1 +1,5 @@
+com/victor/tasks/Mongo.class
+com/victor/tasks/Task.class
 com/victor/tasks/App.class
+com/victor/tasks/InterfaceMongo.class
+com/victor/tasks/TaskState.class
