@@ -16,5 +16,4 @@ public class Task {
         this.category = category;
         this.state = TaskState.TODO;
     }
-
 }

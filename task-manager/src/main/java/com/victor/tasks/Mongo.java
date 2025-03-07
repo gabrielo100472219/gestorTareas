@@ -88,7 +88,7 @@ public class Mongo implements InterfaceMongo {
             task.state = TaskState.valueOf(taskDoc.getString("state"));
             
         } catch (Exception e) {
-            System.err.println("Insert failed: " + e.getMessage());
+            System.err.println("Read failed: " + e.getMessage());
         }
         return task;
     }
