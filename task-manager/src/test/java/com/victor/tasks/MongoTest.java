@@ -46,6 +46,14 @@ public class MongoTest {
 
     @Test 
     public void testInsertTaskSuccessful() {
-        
+        Task task = new Task("Test Title", "Test Description", "Test Category");
+        mongo.storeTask(task);
+        Task retrievedTask = mongo.getTask(task.id);
+        assertNotNull(retrievedTask, "Task should be retrieved successfully");
+        assertEquals(task.id, retrievedTask.id, "Task id should match");
+        assertEquals(task.title, retrievedTask.title, "Task title should match");
+        assertEquals(task.description, retrievedTask.description, "Task description should match");
+        assertEquals(task.category, retrievedTask.category, "Task category should match");
+        assertEquals(task.state, retrievedTask.state, "Task state should match");
     }
 }

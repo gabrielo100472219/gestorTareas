@@ -18,13 +18,13 @@ public class Mongo implements InterfaceMongo {
         try {
             mongoClient = MongoClients.create("mongodb://localhost:27017");
             database = mongoClient.getDatabase("tasks");
+            if (!collectionExists("tasks")){
+                database.createCollection("tasks");
+            }
+            collection = database.getCollection("tasks");
             System.out.println("Connected to MongoDB successfully!");
         } catch (Exception e) {
             System.err.println("Connection failed: " + e.getMessage());
-            System.exit(1);
-        }
-        if (!collectionExists("tasks")){
-            database.createCollection("tasks");
         }
     }
 
@@ -59,7 +59,6 @@ public class Mongo implements InterfaceMongo {
             }
         } catch (Exception e) {
             System.err.println("Connection failed: " + e.getMessage());
-            System.exit(1);
         }
     }
     
@@ -74,7 +73,6 @@ public class Mongo implements InterfaceMongo {
             );
         } catch (Exception e) {
             System.err.println("Insert failed: " + e.getMessage());
-            System.exit(1);
         }
     }
 
@@ -85,12 +83,12 @@ public class Mongo implements InterfaceMongo {
             if (taskDoc == null){
                 return null;
             }
-            task = new Task(taskDoc.getString("title"), taskDoc.getString("title"), taskDoc.getString("category"));
+            task = new Task(taskDoc.getString("title"), taskDoc.getString("description"), taskDoc.getString("category"));
+            task.id = taskDoc.getString("_id");
             task.state = TaskState.valueOf(taskDoc.getString("state"));
             
         } catch (Exception e) {
             System.err.println("Insert failed: " + e.getMessage());
-            System.exit(1);
         }
         return task;
     }
